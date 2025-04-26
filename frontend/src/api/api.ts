@@ -2,7 +2,12 @@ import axios from 'axios';
 import { Campaign, CampaignStatus } from '../types/campaign.ts';
 import { LinkedInProfile } from '../types/linkedin.ts';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+// Use environment variable or default to the deployed backend if in production
+const isProduction = process.env.NODE_ENV === 'production';
+const API_URL = process.env.REACT_APP_API_URL || 
+  (isProduction ? 'https://outflo-la6z.onrender.com' : 'http://localhost:5000');
+
+console.log('API URL:', API_URL); // Helpful for debugging
 
 const api = axios.create({
   baseURL: API_URL,

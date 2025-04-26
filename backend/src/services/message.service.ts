@@ -3,8 +3,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-
-const hf = new HfInference("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");
+// Use environment variable or fallback to the provided key
+const apiKey = process.env.HUGGINGFACE_API_KEY || "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";
+const hf = new HfInference(apiKey);
 
 export interface LinkedInProfile {
   name: string;
