@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import campaignRoutes from './routes/campaign.routes';
 import messageRoutes from './routes/message.routes';
+import linkedinRoutes from './routes/linkedin.routes';
 
 dotenv.config();
 
@@ -50,6 +51,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/campaigns', campaignRoutes);
 app.use('/personalized-message', messageRoutes);
+app.use('/linkedin', linkedinRoutes);
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

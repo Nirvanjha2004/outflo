@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import CampaignDashboard from './pages/CampaignDashboard.tsx';
 import LandingPage from './pages/LandingPage.tsx';
+import LinkedInLeadsPage from './pages/LinkedInLeadsPage.tsx';
 import Header from './components/layout/Header.tsx';
 import Footer from './components/layout/Footer.tsx';
 
@@ -103,6 +104,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/dashboard" element={<CampaignDashboard />} />
+          <Route path="/leads" element={<LinkedInLeadsPage />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
         <Footer />

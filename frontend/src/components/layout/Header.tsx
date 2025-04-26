@@ -27,6 +27,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MessageIcon from '@mui/icons-material/Message';
+import GroupIcon from '@mui/icons-material/Group';
 import { styled } from '@mui/material/styles';
 
 const Logo = styled('img')({
@@ -36,6 +37,7 @@ const Logo = styled('img')({
 const pages = [
   { name: 'Dashboard', path: '/dashboard', icon: <DashboardIcon /> },
   { name: 'Campaigns', path: '/dashboard', icon: <CampaignIcon /> },
+  { name: 'Leads', path: '/leads', icon: <GroupIcon /> }, // Add this line
   { name: 'Messages', path: '/dashboard?tab=1', icon: <MessageIcon /> },
 ];
 

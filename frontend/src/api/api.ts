@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Campaign, CampaignStatus } from '../types/campaign.ts';
-import { LinkedInProfile } from '../types/linkedin.ts';
+import { LinkedInProfile, LinkedInProfilesResponse } from '../types/linkedin-profile.ts';
+import { LinkedInProfile as PersonalizedMessageProfile } from '../types/linkedin.ts';
 
 // Use environment variable or default to the deployed backend if in production
 const isProduction = process.env.NODE_ENV === 'production';
@@ -50,8 +51,28 @@ export const toggleCampaignStatus = async (id: string, currentStatus: CampaignSt
   return response.data;
 };
 
+// LinkedIn Profile APIs
+export const scrapeLinkedInProfiles = async (searchUrl: string): Promise<{ success: boolean, message: string }> => {
+  const response = await api.post('/linkedin/scrape', { searchUrl });
+  return response.data;
+};
+
+export const getLinkedInProfiles = async (query: string = ''): Promise<LinkedInProfilesResponse> => {
+  const response = await api.get('/linkedin', { params: { query } });
+  return response.data;
+};
+
+export const getLinkedInProfileById = async (id: string): Promise<LinkedInProfile> => {
+  const response = await api.get(`/linkedin/${id}`);
+  return response.data.data;
+};
+
+export const deleteLinkedInProfileById = async (id: string): Promise<void> => {
+  await api.delete(`/linkedin/${id}`);
+};
+
 // LinkedIn Message API
-export const generatePersonalizedMessage = async (profile: LinkedInProfile): Promise<string> => {
+export const generatePersonalizedMessage = async (profile: PersonalizedMessageProfile): Promise<string> => {
   const response = await api.post('/personalized-message', profile);
   return response.data.message;
 };
