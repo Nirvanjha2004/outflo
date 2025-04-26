@@ -12,30 +12,21 @@ dotenv.config();
 // Create Express app
 const app = express();
 
-// Configure CORS to allow the deployed frontend
+// Configure CORS to allow requests from the frontend
 const allowedOrigins = [
   'http://localhost:3000',
   'https://outflo-chi.vercel.app',
   'https://outflo.vercel.app'
 ];
 
-const corsOptions = {
-  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
-    // Allow requests with no origin (like mobile apps, curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1 || origin?.includes('vercel.app')) {
-      callback(null, true);
-    } else {
-      console.log('Blocked origin:', origin);
-      callback(null, true); // For now, allow all origins but log blocked ones
-    }
-  },
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
-};
+}));
 
 // Middleware
-app.use(cors(corsOptions));
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
